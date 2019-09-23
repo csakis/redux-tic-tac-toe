@@ -8,9 +8,7 @@ import '../../node_modules/@fortawesome/fontawesome-pro/css/all.css';
 
 const Tile = (props) => {
 	let icon = 'far fa-4x ';
-	
 	const value = props.board[props.i][props.j];
-	console.log(value);
 	switch (value) {
 		case -1:
 			icon += 'fa-times has-text-success';

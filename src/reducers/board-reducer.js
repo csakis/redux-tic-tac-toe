@@ -1,4 +1,4 @@
-import { SET_TILE, SCORE_BOARD } from '../constants/constants';
+import { SET_TILE, SCORE_BOARD, RESET_GAME } from '../constants/constants';
 
 const defaultState = {
 	board: [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ],
@@ -15,7 +15,6 @@ export const boardReducer = (state = defaultState, { type, payload }) => {
 			if (state.count < 9 && state.winner === 0 && state.board[i][j] === 0) {
 				tempBoard[i][j] = state.count % 2 === 0 ? 1 : -1;
 				tempCount += 1;
-				//   const winner = this.scoreBoard(tempBoard);
 			}
 			return {
 				...state,
@@ -24,7 +23,7 @@ export const boardReducer = (state = defaultState, { type, payload }) => {
 			};
 		}
 		case SCORE_BOARD: {
-			const b = [...state.board]
+			const b = [ ...state.board ];
 			let winner = 0;
 			[ ...Array(3).keys() ].map((i) => {
 				let res1, res2, res3, res4;
@@ -40,13 +39,23 @@ export const boardReducer = (state = defaultState, { type, payload }) => {
 				if (res1 === -3 || res2 === -3 || res3 === -3 || res4 === -3) {
 					winner = -1;
 				}
-			});
+				return winner
+			}
+			);
 			return {
 				...state,
 				winner
+			};
 		}
-	}
+		case RESET_GAME: {
+			return {
+				...state,
+				board: [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ],
+				winner: 0,
+				count: 0
+			};
+		}
 		default:
-			return state;
+			return { ...state };
 	}
 };
