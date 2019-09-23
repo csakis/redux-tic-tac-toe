@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { setTile } from '../actions/set-tile';
+import { scoreBoard } from '../actions/score-board';
 import { Card } from 'react-bulma-components';
 import './Tile.css';
 import '../../node_modules/@fortawesome/fontawesome-pro/css/all.css';
@@ -45,6 +46,7 @@ const mapActionsToProps = (dispatch) => {
 	return {
 		onSetTile: (i, j) => {
 			dispatch(setTile(i, j));
+			dispatch(scoreBoard())
 		}
 	};
 };
